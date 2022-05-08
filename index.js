@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const { MongoClient, ObjectId } = require('mongodb');
 require('dotenv').config()
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.zzdks.mongodb.net/ArabicHotel?retryWrites=true&w=majority`;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-const port = process.env.PORT || 4500;
+
+
 
 
 
@@ -13,13 +13,14 @@ const app = express()
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false}))
+const port = process.env.PORT || 4500;
 
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 client.connect(err => {
     const allBooksCollection = client.db("uoomdahBookShop").collection("AllBooks");
